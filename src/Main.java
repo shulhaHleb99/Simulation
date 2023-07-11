@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,6 +22,10 @@ public class Main {
         }
 
         ExecutorService exec = Executors.newFixedThreadPool(20);
+
+        Methods.countDown(5, Constants.Strings.START.toString());
+
+
 
 
     }
@@ -57,150 +63,8 @@ public class Main {
         /*---------------------------------------
          *         Actual animal number
          ---------------------------------------*/
-        private static volatile int wolfCount;
-        private static volatile int snakeCount;
-        private static volatile int foxCount;
-        private static volatile int bearCount;
-        private static volatile int eagleCount;
-        private static volatile int horseCount;
-        private static volatile int deerCount;
-        private static volatile int rabbitCount;
-        private static volatile int mouseCount;
-        private static volatile int goatCount;
-        private static volatile int sheepCount;
-        private static volatile int boarCount;
-        private static volatile int buffaloCount;
-        private static volatile int duckCount;
-        private static volatile int larvaCount;
-        private static volatile int plantCount;
 
-        public static int getWolfCount() {
-            return wolfCount;
-        }
-
-        static void setWolfCount(int wolfCount) {
-            Params.wolfCount = wolfCount;
-        }
-
-        public static int getSnakeCount() {
-            return snakeCount;
-        }
-
-        static void setSnakeCount(int snakeCount) {
-            Params.snakeCount = snakeCount;
-        }
-
-        public static int getFoxCount() {
-            return foxCount;
-        }
-
-        static void setFoxCount(int foxCount) {
-            Params.foxCount = foxCount;
-        }
-
-        public static int getBearCount() {
-            return bearCount;
-        }
-
-        static void setBearCount(int bearCount) {
-            Params.bearCount = bearCount;
-        }
-
-        public static int getEagleCount() {
-            return eagleCount;
-        }
-
-        static void setEagleCount(int eagleCount) {
-            Params.eagleCount = eagleCount;
-        }
-
-        public static int getHorseCount() {
-            return horseCount;
-        }
-
-        static void setHorseCount(int horseCount) {
-            Params.horseCount = horseCount;
-        }
-
-        public static int getDeerCount() {
-            return deerCount;
-        }
-
-        static void setDeerCount(int deerCount) {
-            Params.deerCount = deerCount;
-        }
-
-        public static int getRabbitCount() {
-            return rabbitCount;
-        }
-
-        static void setRabbitCount(int rabbitCount) {
-            Params.rabbitCount = rabbitCount;
-        }
-
-        public static int getMouseCount() {
-            return mouseCount;
-        }
-
-        static void setMouseCount(int mouseCount) {
-            Params.mouseCount = mouseCount;
-        }
-
-        public static int getGoatCount() {
-            return goatCount;
-        }
-
-        static void setGoatCount(int goatCount) {
-            Params.goatCount = goatCount;
-        }
-
-        public static int getSheepCount() {
-            return sheepCount;
-        }
-
-        static void setSheepCount(int sheepCount) {
-            Params.sheepCount = sheepCount;
-        }
-
-        public static int getBoarCount() {
-            return boarCount;
-        }
-
-        static void setBoarCount(int boarCount) {
-            Params.boarCount = boarCount;
-        }
-
-        public static int getBuffaloCount() {
-            return buffaloCount;
-        }
-
-        static void setBuffaloCount(int buffaloCount) {
-            Params.buffaloCount = buffaloCount;
-        }
-
-        public static int getDuckCount() {
-            return duckCount;
-        }
-
-        static void setDuckCount(int duckCount) {
-            Params.duckCount = duckCount;
-        }
-
-        public static int getLarvaCount() {
-            return larvaCount;
-        }
-
-        static void setLarvaCount(int larvaCount) {
-            Params.larvaCount = larvaCount;
-        }
-
-        public static int getPlantCount() {
-            return plantCount;
-        }
-
-        static void setPlantCount(int plantCount) {
-            Params.plantCount = plantCount;
-        }
+        static final ConcurrentHashMap<String, Integer> creaturesCount = new ConcurrentHashMap<>();
 
 
 

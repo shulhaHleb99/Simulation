@@ -1,4 +1,31 @@
+import java.util.HashMap;
+
 public final class Constants {
+
+    static final HashMap<String, String> whoIsWho = new HashMap<>() {{
+
+        put("Bear", "Carnivore");
+        put("Eagle", "Carnivore");
+        put("Fox", "Carnivore");
+        put("Snake", "Carnivore");
+        put("Wolf", "Carnivore");
+
+        put("Boar", "Herbivore");
+        put("Buffalo", "Herbivore");
+        put("Deer", "Herbivore");
+        put("Duck", "Herbivore");
+        put("Goat", "Herbivore");
+        put("Horse", "Herbivore");
+        put("Larva", "Herbivore");
+        put("Mouse", "Herbivore");
+        put("Rabbit", "Herbivore");
+        put("Sheep", "Herbivore");
+
+        put("Plant", "");
+    }};
+
+    static final String[] creaturesNames = {"Wolf", "Snake", "Fox", "Bear", "Eagle", "Horse", "Deer", "Rabbit", "Mouse", "Goat",
+            "Sheep", "Boar", "Buffalo", "Duck", "Larva", "Plant"};
 
     public enum Strings {
         ENTER_X("Please, enter field param X:"),
@@ -7,7 +34,9 @@ public final class Constants {
         MUST_BE_POSITIVE("Value must be positive"),
         WRONG_VALUE("Wrong value entered!"),
         DEF_SQUARE("Do you want to use default terrain square 25 x 25?"),
-        DEFAULT_QUANTTIES("Use recommended quantities of creatures for this square?")
+        DEFAULT_QUANTTIES("Use recommended quantities of creatures for this square?"),
+
+        START("Simulation will start in:")
 
         ;
 

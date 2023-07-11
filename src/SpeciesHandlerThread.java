@@ -16,17 +16,22 @@ public class SpeciesHandlerThread implements Runnable {
     private ArrayList<Creature> createCertainSpeciesInstances() {
         ThreadLocalRandom thlRandom = ThreadLocalRandom.current();
 
+        Class<?> c = null;
         ArrayList<Creature> creatures = new ArrayList<>();
         try {
-            Class c = Class.forName(speciesName);
+            c = Class.forName(Constants.whoIsWho.get(speciesName) + "_" + speciesName);
         } catch (ClassNotFoundException cnfe) {
             System.out.println(cnfe.getMessage());
         }
 
         for (int i = 0; i < speciesCount; i++) {
             try {
-                Class c = Class.forName(speciesName);
-                creatures.add((Creature) c.getConstructors()[0].newInstance());
+                creatures.add((Creature) c.getConstructors()[0].newInstance(
+
+                        ThreadLocalRandom.current().nextInt(1, Main.Params.getTerrainSizeX()),
+                        ThreadLocalRandom.current().nextInt(1, Main.Params.getTerrainSizeY())
+
+                ));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

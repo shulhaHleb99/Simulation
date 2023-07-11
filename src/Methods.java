@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class Methods {
 
@@ -50,9 +51,9 @@ public class Methods {
         System.out.println("Enter Y or N");
         while (true) {
             String s = reader.readLine();
-            if (s.equals("Y")) {
+            if (s.toUpperCase().equals("Y")) {
                 return true;
-            } else if (s.equals("N")) {
+            } else if (s.toUpperCase().equals("N")) {
                 return false;
             } else {
                 System.out.println(Constants.Strings.WRONG_VALUE);
@@ -61,7 +62,7 @@ public class Methods {
     }
 
     private static int getDefaultCreatureCount(int defaultCountIndex) {
-        return (int)Math.round(defaultCountIndex * 1.0 / 625 * Main.Params.getSquare());
+        return (int) Math.round(defaultCountIndex * 1.0 / 625 * Main.Params.getSquare());
     }
 
     static void setDefaultCreatureCount() {
@@ -88,57 +89,70 @@ public class Methods {
 
         //------------------------------------------
 
-        Main.Params.setWolfCount(Methods.getDefaultCreatureCount(defaultWolfCountIndex));
-        Main.Params.setSnakeCount(Methods.getDefaultCreatureCount(defaultSnakeCountIndex));
-        Main.Params.setFoxCount(Methods.getDefaultCreatureCount(defaultFoxCountIndex));
-        Main.Params.setBearCount(Methods.getDefaultCreatureCount(defaultBearCountIndex));
-        Main.Params.setEagleCount(Methods.getDefaultCreatureCount(defaultEagleCountIndex));
-        Main.Params.setHorseCount(Methods.getDefaultCreatureCount(defaultHorseCountIndex));
-        Main.Params.setDeerCount(Methods.getDefaultCreatureCount(defaultDeerCountIndex));
-        Main.Params.setRabbitCount(Methods.getDefaultCreatureCount(defaultRabbitCountIndex));
-        Main.Params.setMouseCount(Methods.getDefaultCreatureCount(defaultMouseCountIndex));
-        Main.Params.setGoatCount(Methods.getDefaultCreatureCount(defaultGoatCountIndex));
-        Main.Params.setSheepCount(Methods.getDefaultCreatureCount(defaultSheepCountIndex));
-        Main.Params.setBoarCount(Methods.getDefaultCreatureCount(defaultBoarCountIndex));
-        Main.Params.setBuffaloCount(Methods.getDefaultCreatureCount(defaultBuffaloCountIndex));
-        Main.Params.setDuckCount(Methods.getDefaultCreatureCount(defaultDuckCountIndex));
-        Main.Params.setLarvaCount(Methods.getDefaultCreatureCount(defaultLarvaCountIndex));
-        Main.Params.setPlantCount(Methods.getDefaultCreatureCount(defaultPlantCountIndex));
+        var c = Main.Params.creaturesCount;
+        c.put("Wolf", defaultWolfCountIndex);
+        c.put("Snake", defaultSnakeCountIndex);
+        c.put("Fox", defaultFoxCountIndex);
+        c.put("Bear", defaultBearCountIndex);
+        c.put("Eagle", defaultEagleCountIndex);
+        c.put("Horse", defaultHorseCountIndex);
+        c.put("Deer", defaultDeerCountIndex);
+        c.put("Rabbit", defaultRabbitCountIndex);
+        c.put("Mouse", defaultMouseCountIndex);
+        c.put("Goat", defaultGoatCountIndex);
+        c.put("Sheep", defaultSheepCountIndex);
+        c.put("Boar", defaultBoarCountIndex);
+        c.put("Buffalo", defaultBuffaloCountIndex);
+        c.put("Duck", defaultDuckCountIndex);
+        c.put("Larva", defaultLarvaCountIndex);
+        c.put("Plant", defaultPlantCountIndex);
+
     }
 
     static void setCreaturesCounts() throws IOException {
         int counter = 1;
-        String[] creaturesNames = {"Wolf", "Snake", "Fox", "Bear", "Eagle", "Horse", "Deer", "Rabbit", "Mouse", "Goat",
-                                    "Sheep", "Boar", "Buffalo", "Duck", "Larva", "Plant"};
-        try {
-            for (String name : creaturesNames) {
-                Method m = Main.Params.class.getDeclaredMethod("set" + name + "Count", int.class);
 
-                while (true) {
-                    try {
-                        System.out.println(counter + ". Please, enter " + name + "s count:");
-                        int inputValue = Integer.parseInt(reader.readLine());
-                        if (inputValue > 1000) {
-                            System.out.println(Constants.Strings.TOO_BIG);
-                        } else if (inputValue < 0) {
-                            System.out.println(Constants.Strings.MUST_BE_POSITIVE);
-                        } else {
-                            m.invoke(Main.Params.class, inputValue);
-                            counter++;
-                            break;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        System.out.println(Constants.Strings.WRONG_VALUE);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        // This case should never happen
+        for (String name : Constants.creaturesNames) {
+
+            while (true) {
+                try {
+                    System.out.println(counter + ". Please, enter " + name + "s count:");
+                    int inputValue = Integer.parseInt(reader.readLine());
+                    if (inputValue > 1000) {
+                        System.out.println(Constants.Strings.TOO_BIG);
+                    } else if (inputValue < 0) {
+                        System.out.println(Constants.Strings.MUST_BE_POSITIVE);
+                    } else {
+                        Main.Params.creaturesCount.put(name, inputValue);
+                        counter++;
+                        break;
                     }
+                } catch (NumberFormatException nfe) {
+                    System.out.println(Constants.Strings.WRONG_VALUE);
                 }
             }
-        } catch (NoSuchMethodException nsme) {
-            // This case sould never happen
         }
-
     }
 
+    static void countDown(int from, String phrase) {
+        if (from < 0 || from > 60) {
+            return;
+        }
+        System.out.println(phrase);
+        while (from > 0) {
+            System.out.println(from--);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ie) {
+                //This case should never happen
+            }
+        }
+    }
+
+    static ArrayList<Runnable> prepareThreads() {
+        return new ArrayList<Runnable>() {{
+            add(new SpeciesHandlerThread())
+        }};
+    }
 
 }

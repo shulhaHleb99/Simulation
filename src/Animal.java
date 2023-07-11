@@ -4,7 +4,7 @@ public abstract class Animal implements Creature {
     public final Cell coords;
     private final int id;
 
-    public Animal(int x, int y) {
+    public Animal(int y, int x) {
         coords = Main.Params.terr.getCellArray()[y][x];
         this.id = Main.Params.creaturesNumber.incrementAndGet();
     }

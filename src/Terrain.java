@@ -24,7 +24,9 @@ public class Terrain {
     private static Cell[][] generate(int y, int x) {
         Cell[][] array = new Cell[y][x];
         for (int i = 0; i < y; i++) {
-            Arrays.fill(array[i], new Cell(TypeOfTerrain.F));
+            for (int k = 0; k < x; k++) {
+                array[i][k] = new Cell(TypeOfTerrain.F, i, k);
+            }
         }
 
         return array;
