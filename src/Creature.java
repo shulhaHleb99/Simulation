@@ -1,10 +1,13 @@
 public interface Creature {
 
-    void eat();
+    boolean eat();
 
-    void reproduce();
+    boolean reproduce();
 
-    void makeMove();
+    boolean move();
 
-    void calculateChance();
+    //------------------------
+
+    int getId();
+
 }

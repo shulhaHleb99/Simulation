@@ -4,41 +4,30 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Methods {
 
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     static void collectSizeInfo() throws IOException {
+        Main.Params.setTerrainSizeX(enterNumber(Constants.Strings.ENTER_X.toString(),  0, 300));
+        Main.Params.setTerrainSizeY(enterNumber(Constants.Strings.ENTER_Y.toString(), 0, 300));
+    }
 
+    static int enterNumber(String question, int from, int to) throws IOException {
         while (true) {
             try {
-                System.out.println(Constants.Strings.ENTER_X);
+                System.out.println(question);
                 int x = Integer.parseInt(reader.readLine());
                 if (x < 0) {
                     System.out.println(Constants.Strings.MUST_BE_POSITIVE);
-                } else if (x > 300) {
+                } else if (x >= 0 && x < from) {
+                    System.out.println(Constants.Strings.CANT_BE_LESS.toString() + from);
+                } else if (x > to) {
                     System.out.println(Constants.Strings.TOO_BIG);
                 } else {
-                    Main.Params.setTerrainSizeX(x);
-                    break;
-                }
-            } catch (NumberFormatException nfe) {
-                System.out.println(Constants.Strings.WRONG_VALUE);
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.println(Constants.Strings.ENTER_Y);
-                int y = Integer.parseInt(reader.readLine());
-                if (y < 0) {
-                    System.out.println(Constants.Strings.MUST_BE_POSITIVE);
-                } else if (y > 300) {
-                    System.out.println(Constants.Strings.TOO_BIG);
-                } else {
-                    Main.Params.setTerrainSizeY(y);
-                    break;
+                    return x;
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println(Constants.Strings.WRONG_VALUE);
@@ -61,52 +50,8 @@ public class Methods {
         }
     }
 
-    private static int getDefaultCreatureCount(int defaultCountIndex) {
+    static int getDefaultCreatureCount(int defaultCountIndex) {
         return (int) Math.round(defaultCountIndex * 1.0 / 625 * Main.Params.getSquare());
-    }
-
-    static void setDefaultCreatureCount() {
-        /*---------------------------------------
-         *         Default animal numbers
-         ---------------------------------------*/
-
-        final int defaultWolfCountIndex = 50;
-        final int defaultSnakeCountIndex = 30;
-        final int defaultFoxCountIndex = 40;
-        final int defaultBearCountIndex = 15;
-        final int defaultEagleCountIndex = 20;
-        final int defaultHorseCountIndex = 30;
-        final int defaultDeerCountIndex = 75;
-        final int defaultRabbitCountIndex = 75;
-        final int defaultMouseCountIndex = 80;
-        final int defaultGoatCountIndex = 30;
-        final int defaultSheepCountIndex = 25;
-        final int defaultBoarCountIndex = 50;
-        final int defaultBuffaloCountIndex = 25;
-        final int defaultDuckCountIndex = 50;
-        final int defaultLarvaCountIndex = 150;
-        final int defaultPlantCountIndex = 500;
-
-        //------------------------------------------
-
-        var c = Main.Params.creaturesCount;
-        c.put("Wolf", defaultWolfCountIndex);
-        c.put("Snake", defaultSnakeCountIndex);
-        c.put("Fox", defaultFoxCountIndex);
-        c.put("Bear", defaultBearCountIndex);
-        c.put("Eagle", defaultEagleCountIndex);
-        c.put("Horse", defaultHorseCountIndex);
-        c.put("Deer", defaultDeerCountIndex);
-        c.put("Rabbit", defaultRabbitCountIndex);
-        c.put("Mouse", defaultMouseCountIndex);
-        c.put("Goat", defaultGoatCountIndex);
-        c.put("Sheep", defaultSheepCountIndex);
-        c.put("Boar", defaultBoarCountIndex);
-        c.put("Buffalo", defaultBuffaloCountIndex);
-        c.put("Duck", defaultDuckCountIndex);
-        c.put("Larva", defaultLarvaCountIndex);
-        c.put("Plant", defaultPlantCountIndex);
-
     }
 
     static void setCreaturesCounts() throws IOException {
@@ -151,8 +96,24 @@ public class Methods {
 
     static ArrayList<Runnable> prepareThreads() {
         return new ArrayList<Runnable>() {{
-            add(new SpeciesHandlerThread())
+            for (String name: Constants.creaturesNames) {
+                add(new SpeciesHandlerThread(name));
+            }
         }};
+    }
+
+    static Constants.Directions getRandomDirection() {
+        return switch (ThreadLocalRandom.current().nextInt(0, 4)) {
+            case 1 -> Constants.Directions.UP;
+            case 2 -> Constants.Directions.RIGHT;
+            case 3 -> Constants.Directions.DOWN;
+            case 0 -> Constants.Directions.LEFT;
+            default -> throw new IllegalStateException("Unexpected value");
+        };
+    }
+
+    static void makeRecord(int id, int actionId, boolean result, Class<? extends Creature>... who) {
+
     }
 
 }

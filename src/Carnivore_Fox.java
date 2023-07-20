@@ -1,12 +1,12 @@
 public class Carnivore_Fox extends Carnivore {
 
-    private static final int weight = 8;
+    static final double weight = 8;
 
-    private static final int cellsPerStep = 2;
+    static final int cellsPerStep = 2;
 
-    public static final int kilosForSatiety = 2;
+    static final double kilosForSatiety = 2;
 
-    public Carnivore_Fox(int y, int x) {
+    Carnivore_Fox(int y, int x) {
         super(y, x);
     }
 }

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -15,15 +16,20 @@ public class Main {
 
         Params.terr = Terrain.getTerr();
 
-        if (Methods.chooseYesNo(Constants.Strings.DEFAULT_QUANTTIES)) {
-            Methods.setDefaultCreatureCount();
-        } else {
+        if (!Methods.chooseYesNo(Constants.Strings.DEF_QUANTTIES)) {
             Methods.setCreaturesCounts();
         }
 
+        if (!Methods.chooseYesNo(Constants.Strings.DEF_STEPS)) {
+            Methods.enterNumber(Constants.Strings.ENTER_STEPS.toString(), 0, 300);
+        }
+
         ExecutorService exec = Executors.newFixedThreadPool(20);
+        Params.threads = Methods.prepareThreads();
 
         Methods.countDown(5, Constants.Strings.START.toString());
+
+        Params.threads.forEach(exec::execute);
 
 
 
@@ -60,14 +66,45 @@ public class Main {
             return terrainSizeY;
         }
 
-        /*---------------------------------------
-         *         Actual animal number
-         ---------------------------------------*/
+        static final ConcurrentHashMap<String, Integer> creaturesCount = new ConcurrentHashMap<>()
 
-        static final ConcurrentHashMap<String, Integer> creaturesCount = new ConcurrentHashMap<>();
+        {{
+            put("Wolf", Methods.getDefaultCreatureCount(50));
+            put("Snake", Methods.getDefaultCreatureCount(30));
+            put("Fox", Methods.getDefaultCreatureCount(40));
+            put("Bear", Methods.getDefaultCreatureCount(15));
+            put("Eagle", Methods.getDefaultCreatureCount(20));
+            put("Horse", Methods.getDefaultCreatureCount(30));
+            put("Deer", Methods.getDefaultCreatureCount(75));
+            put("Rabbit", Methods.getDefaultCreatureCount(75));
+            put("Mouse", Methods.getDefaultCreatureCount(80));
+            put("Goat", Methods.getDefaultCreatureCount(30));
+            put("Sheep", Methods.getDefaultCreatureCount(25));
+            put("Boar", Methods.getDefaultCreatureCount(50));
+            put("Buffalo", Methods.getDefaultCreatureCount(25));
+            put("Duck", Methods.getDefaultCreatureCount(50));
+            put("Larva", Methods.getDefaultCreatureCount(150));
+            put("Plant", Methods.getDefaultCreatureCount(500));
 
+        }};
 
+        static ArrayList<Runnable> threads;
 
+        //----------------------------------------------
 
+        private static int stepCount = 200;
+
+        public synchronized static int getStepCount() {
+            return stepCount;
+        }
+        private static int currentStep;
+
+        public synchronized static int getCurrentStep() {
+            return currentStep;
+        }
+
+        synchronized static void nextStep() {
+            currentStep++;
+        }
     }
 }

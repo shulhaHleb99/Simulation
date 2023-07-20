@@ -4,9 +4,4 @@ public abstract class Herbivore extends Animal {
         super(y, x);
     }
 
-    @Override
-    public void eat() {
-
-    }
-
 }

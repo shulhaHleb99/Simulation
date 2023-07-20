@@ -32,11 +32,14 @@ public final class Constants {
         ENTER_Y("Please, enter field param Y:"),
         TOO_BIG("Value is too big"),
         MUST_BE_POSITIVE("Value must be positive"),
+
+        CANT_BE_LESS("Value can't be less than "),
         WRONG_VALUE("Wrong value entered!"),
         DEF_SQUARE("Do you want to use default terrain square 25 x 25?"),
-        DEFAULT_QUANTTIES("Use recommended quantities of creatures for this square?"),
-
-        START("Simulation will start in:")
+        DEF_QUANTTIES("Use recommended quantities of creatures for this square?"),
+        START("Simulation will start in:"),
+        DEF_STEPS("Do you want to use default value of steps?"),
+        ENTER_STEPS("Please, enter steps number:")
 
         ;
 
