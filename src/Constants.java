@@ -90,4 +90,21 @@ public final class Constants {
         final int deltaX;
     }
 
+    public static class Chances {
+
+        private static final HashMap<Class<?>, HashMap<Class<?>, Integer>> container = new HashMap<>() {{
+           put(Carnivore_Wolf.class, new HashMap<>() {{
+               put(Carnivore_Wolf.class, 0);
+               put(Carnivore_Snake.class, 0);
+               put(Carnivore_Fox.class, 0);
+               put(Carnivore_Bear.class, 0);
+               put(Carnivore_Eagle.class, 0);
+               put(Herbivore_Horse.class, 10);
+               put(Herbivore_Deer.class, 15);
+               put(Herbivore_Rabbit.class, 60);
+
+           }});
+        }};
+    }
+
 }

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SpeciesHandlerThread implements Runnable {
@@ -12,8 +14,13 @@ public class SpeciesHandlerThread implements Runnable {
 
     private final ThreadLocalRandom thlRandom = ThreadLocalRandom.current();
 
-    public boolean readyForNextStep = false;
-
+    private static final CyclicBarrier cBarrier = new CyclicBarrier(15, new Runnable() {
+        @Override
+        public void run() {
+            Main.Params.nextStep();
+            System.out.println("\n\n### STEP №" + Main.Params.getCurrentStep() +" ###\n\n");
+        }
+    });
     public SpeciesHandlerThread(String speciesName) {
         this.speciesName = speciesName;
         this.speciesCount = Main.Params.creaturesCount.get(speciesName);
@@ -47,22 +54,27 @@ public class SpeciesHandlerThread implements Runnable {
         while (Main.Params.getCurrentStep() <= Main.Params.getStepCount()) {
             for (Creature c: speciesContainer) {
 
-                boolean successfully;
+                Responce resp;
                 int actionId = switch (ThreadLocalRandom.current().nextInt(0, 3)) {
                     case 0 -> {
-                        successfully = c.eat();
+                        resp = c.eat();
                         yield 0;
                     } case 1 -> {
-                        successfully = c.reproduce();
+                        resp = c.reproduce();
                         yield 1;
                     } case 2 -> {
-                        successfully = c.move();
+                        resp = c.move();
                         yield 2;
                     }
                     default -> throw new RuntimeException("Wrong value!");
                 };
 
-                Methods.makeRecord(c.);
+                Methods.makeRecord(c.getId(), c.getCoords().getX(), c.getCoords().getY(), actionId, cl, resp);
+            }
+            try {
+                cBarrier.await();
+            } catch (InterruptedException | BrokenBarrierException exception) {
+                // This case should never happen
             }
         }
     }

@@ -10,21 +10,23 @@ public abstract class Animal implements Creature {
         this.id = Main.Params.creaturesNumber.incrementAndGet();
     }
 
-    public boolean move() {
-        return true;
+    public Responce move() {
+        return new Responce();
     }
 
     @Override
-    public abstract boolean eat();
+    public abstract Responce eat();
 
     @Override
-    public boolean reproduce() {
-        return true;
+    public Responce reproduce() {
+        return new Responce();
     }
 
     public int getId() {
         return id;
     }
 
-
+    public Cell getCoords() {
+        return coords;
+    }
 }

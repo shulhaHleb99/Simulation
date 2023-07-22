@@ -12,21 +12,25 @@ public class _Plant implements Creature {
     }
 
     @Override
-    public boolean eat() {
-        return true;
+    public Responce eat() {
+        return new Responce();
     }
 
     @Override
-    public boolean reproduce() {
-        return true;
+    public Responce reproduce() {
+        return new Responce();
     }
 
-    public boolean move() {
-        return false;
+    public Responce move() {
+        return new Responce();
     }
 
 
     public int getId() {
         return id;
+    }
+
+    public Cell getCoords() {
+        return coords;
     }
 }

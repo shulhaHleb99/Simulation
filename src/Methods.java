@@ -51,7 +51,7 @@ public class Methods {
     }
 
     static int getDefaultCreatureCount(int defaultCountIndex) {
-        return (int) Math.round(defaultCountIndex * 1.0 / 625 * Main.Params.getSquare());
+        return (int) Math.round(defaultCountIndex * 1.0 / 625 * Main.Params.getTerrainSizeX() * Main.Params.getTerrainSizeY());
     }
 
     static void setCreaturesCounts() throws IOException {
@@ -112,7 +112,7 @@ public class Methods {
         };
     }
 
-    static void makeRecord(int id, int actionId, boolean result, Class<? extends Creature>... who) {
+    static void makeRecord(int id, int x, int y, int actionId, Class<?> who, Responce resp) {
 
     }
 

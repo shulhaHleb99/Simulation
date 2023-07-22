@@ -21,7 +21,7 @@ public class Main {
         }
 
         if (!Methods.chooseYesNo(Constants.Strings.DEF_STEPS)) {
-            Methods.enterNumber(Constants.Strings.ENTER_STEPS.toString(), 0, 300);
+            Params.stepCount = Methods.enterNumber(Constants.Strings.ENTER_STEPS.toString(), 0, 300);
         }
 
         ExecutorService exec = Executors.newFixedThreadPool(20);
@@ -43,12 +43,6 @@ public class Main {
         private static int terrainSizeY = 25;
 
         static AtomicInteger creaturesNumber = new AtomicInteger(0);
-
-        private static final int square = terrainSizeX*terrainSizeY;
-
-        public static int getSquare() {
-            return square;
-        }
 
         static void setTerrainSizeX(int terrainSizeX) {
             Params.terrainSizeX = terrainSizeX;
@@ -97,13 +91,13 @@ public class Main {
         public synchronized static int getStepCount() {
             return stepCount;
         }
-        private static int currentStep;
+        private static int currentStep = 1;
 
         public synchronized static int getCurrentStep() {
             return currentStep;
         }
 
-        synchronized static void nextStep() {
+        static void nextStep() {
             currentStep++;
         }
     }

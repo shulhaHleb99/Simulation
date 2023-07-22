@@ -1,13 +1,15 @@
 public interface Creature {
 
-    boolean eat();
+    Responce eat();
 
-    boolean reproduce();
+    Responce reproduce();
 
-    boolean move();
+    Responce move();
 
     //------------------------
 
     int getId();
+
+    Cell getCoords();
 
 }
