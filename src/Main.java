@@ -24,6 +24,8 @@ public class Main {
             Params.stepCount = Methods.enterNumber(Constants.Strings.ENTER_STEPS.toString(), 0, 300);
         }
 
+        Methods.reader.close();
+
         ExecutorService exec = Executors.newFixedThreadPool(20);
         Params.threads = Methods.prepareThreads();
 
@@ -32,15 +34,13 @@ public class Main {
         Params.threads.forEach(exec::execute);
 
 
-
-
     }
 
     static class Params {
 
         static Terrain terr;
-        private static int terrainSizeX = 25;
-        private static int terrainSizeY = 25;
+        private static int terrainSizeX = 10;
+        private static int terrainSizeY = 10;
 
         static AtomicInteger creaturesNumber = new AtomicInteger(0);
 
@@ -60,7 +60,8 @@ public class Main {
             return terrainSizeY;
         }
 
-        static final ConcurrentHashMap<String, Integer> creaturesCount = new ConcurrentHashMap<>()
+        static final ConcurrentHashMap<Class<?>, ArrayList<Creature>> allCreatures = new ConcurrentHashMap<>();
+        static final ConcurrentHashMap<String, Integer> creaturesCount = new ConcurrentHashMap<String, Integer>()
 
         {{
             put("Wolf", Methods.getDefaultCreatureCount(50));

@@ -35,12 +35,19 @@ public final class Constants {
 
         CANT_BE_LESS("Value can't be less than "),
         WRONG_VALUE("Wrong value entered!"),
-        DEF_SQUARE("Do you want to use default terrain square 25 x 25?"),
+        DEF_SQUARE("Do you want to use default terrain square 10 x 10?"),
         DEF_QUANTTIES("Use recommended quantities of creatures for this square?"),
         START("Simulation will start in:"),
         DEF_STEPS("Do you want to use default value of steps?"),
-        ENTER_STEPS("Please, enter steps number:")
-
+        ENTER_STEPS("Please, enter steps number:"),
+        IF_EAT_PATT("%s(ID: %d) trying to eat %s(ID: %d). (Chance %d)  Y:%d X:%d Successfully: %s \n"),
+        IF_REPRODUCE_PATT("%s(ID: %d) trying to reproduce. Y:%d X:%d Successfully: %s \n"),
+        IF_MOVE_PATT("%s(ID: %d) moving from Y:%d X:%d to Y:%d X:%d \n"),
+        LARVA_MOVE("Larva(ID: %d) is crawling around the forest. Y:%d X:%d \n"),
+        HUNT_FAILED("%s(ID: %d) couldn't have a meal. Y:%d X:%d Successfully: false \n"),
+        PLANT_GROWING("Plant(ID: %d) is growing. Y:%d X:%d \n"),
+        REPRODUCING_FAILED("%s (ID: %d) couldn't find a pair for reproducing. Y:%d X:%d \n"),
+        REPRODUCING_SUCCESSED("%s (ID: %d) successfully reproduced! Y:%d X:%d \n");
         ;
 
         private String string;
@@ -102,9 +109,289 @@ public final class Constants {
                put(Herbivore_Horse.class, 10);
                put(Herbivore_Deer.class, 15);
                put(Herbivore_Rabbit.class, 60);
-
+               put(Herbivore_Mouse.class, 80);
+               put(Herbivore_Goat.class, 60);
+               put(Herbivore_Sheep.class, 70);
+               put(Herbivore_Boar.class, 15);
+               put(Herbivore_Buffalo.class, 10);
+               put(Herbivore_Duck.class, 40);
+               put(Herbivore_Larva.class, 0);
+               put(_Plant.class, 0);
            }});
+
+            put(Carnivore_Snake.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 15);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 20);
+                put(Herbivore_Mouse.class, 40);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 10);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 0);
+            }});
+
+            put(Carnivore_Fox.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 70);
+                put(Herbivore_Mouse.class, 90);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 60);
+                put(Herbivore_Larva.class, 40);
+                put(_Plant.class, 0);
+            }});
+
+            put(Carnivore_Bear.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 80);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 40);
+                put(Herbivore_Deer.class, 80);
+                put(Herbivore_Rabbit.class, 80);
+                put(Herbivore_Mouse.class, 90);
+                put(Herbivore_Goat.class, 70);
+                put(Herbivore_Sheep.class, 70);
+                put(Herbivore_Boar.class, 50);
+                put(Herbivore_Buffalo.class, 20);
+                put(Herbivore_Duck.class, 10);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 0);
+            }});
+
+            put(Carnivore_Eagle.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 10);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 90);
+                put(Herbivore_Mouse.class, 90);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 80);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 0);
+            }});
+
+            put(Herbivore_Horse.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Deer.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Rabbit.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Mouse.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 90);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Goat.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Sheep.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Boar.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 50);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 90);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Buffalo.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Duck.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 90);
+                put(_Plant.class, 100);
+            }});
+
+            put(Herbivore_Larva.class, new HashMap<>() {{
+                put(Carnivore_Wolf.class, 0);
+                put(Carnivore_Snake.class, 0);
+                put(Carnivore_Fox.class, 0);
+                put(Carnivore_Bear.class, 0);
+                put(Carnivore_Eagle.class, 0);
+                put(Herbivore_Horse.class, 0);
+                put(Herbivore_Deer.class, 0);
+                put(Herbivore_Rabbit.class, 0);
+                put(Herbivore_Mouse.class, 0);
+                put(Herbivore_Goat.class, 0);
+                put(Herbivore_Sheep.class, 0);
+                put(Herbivore_Boar.class, 0);
+                put(Herbivore_Buffalo.class, 0);
+                put(Herbivore_Duck.class, 0);
+                put(Herbivore_Larva.class, 0);
+                put(_Plant.class, 100);
+            }});
         }};
+
+        public static int getChance(Class<?> who, Class<?> whom) {
+            return container.get(who).get(whom);
+        }
+        public static HashMap<Class<?>, Integer> getChance(Class<?> who) {
+            return container.get(who);
+        }
     }
 
 }

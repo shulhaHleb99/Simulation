@@ -23,14 +23,18 @@ public class Cell {
 
     //--------------------------------------------------------------------------
 
-    private ArrayList<Creature> creatures = new ArrayList<>();
+    private volatile ArrayList<Creature> creatures = new ArrayList<>();
 
     ArrayList<Creature> getCreatures() {
         return creatures;
     }
 
-    void setCreatures(ArrayList<Creature> creatures) {
-        this.creatures = creatures;
+    synchronized void addCreature(Creature c) {
+        creatures.add(c);
+    }
+
+    synchronized void removeCreature(Creature c) {
+        creatures.remove(c);
     }
 
     //--------------------------------------------------------------------------

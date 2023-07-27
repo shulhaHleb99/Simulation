@@ -113,7 +113,47 @@ public class Methods {
     }
 
     static void makeRecord(int id, int x, int y, int actionId, Class<?> who, Responce resp) {
+        if (resp.getAdditionalCode() != 0) {
+            switch (resp.getAdditionalCode()) {
+                case 1:
+                    System.out.printf(Constants.Strings.LARVA_MOVE.toString(), id, y, x);
+                    break;
+                case 2:
+                    System.out.printf(Constants.Strings.HUNT_FAILED.toString(), who.getSimpleName(), id, y, x);
+                    break;
+                case 3:
+                    System.out.printf(Constants.Strings.PLANT_GROWING.toString(), id, y, x);
+                    break;
+                case 4:
+                    System.out.printf(Constants.Strings.REPRODUCING_FAILED.toString(), who.getSimpleName(), id, y, x);
+                    break;
+                case 5:
+                    System.out.printf(Constants.Strings.REPRODUCING_SUCCESSED.toString(), who.getSimpleName(), id, y, x);
+            }
+            return;
+        }
 
+        int chance = 0;
+        if (actionId == 0) {
+            chance = Constants.Chances.getChance(who, resp.getWhom());
+        }
+
+        switch (actionId) {
+            case 0 -> System.out.printf(Constants.Strings.IF_EAT_PATT.toString(),
+                    who.getSimpleName(), id, resp.getWhom().getSimpleName(), resp.getTargetId(), chance, y, x, resp.isSuccessfull());
+            case 1 -> System.out.printf(Constants.Strings.IF_REPRODUCE_PATT.toString(),
+                    who.getSimpleName(), id,  y, x, resp.isSuccessfull());
+            case 2 -> System.out.printf(Constants.Strings.IF_MOVE_PATT.toString(),
+                    who.getSimpleName(), id, y, x, resp.getY(), resp.getX());
+        };
+    }
+
+    static boolean headsOrTails(int chance) {
+        return ThreadLocalRandom.current().nextInt(1, 101) <= chance;
+    }
+
+    static void showCommonInfo() {
+        // TODO
     }
 
 }
